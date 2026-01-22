@@ -1,0 +1,29 @@
+{
+  "Categories": [
+    "Items.Utility"
+  ],
+  "Icon": "Icons/ItemsGenerated/Ymmersive_Equipment_Blueprint.png",
+  "IconProperties": {
+    "Scale": 0.5,
+    "Rotation": [
+      315.0,
+      270.0,
+      0.0
+    ],
+    "Translation": [
+      -21.0,
+      -22.0
+    ]
+  },
+  "Quality": "Common",
+  "ItemLevel": 10,
+  "Model": "Items/Ymmersive_Equipment_Blueprint.blockymodel",
+  "Texture": "Items/Ymmersive_Equipment_Blueprint.png",
+  "Tags": {
+    "Type": [
+      "Utility"
+    ]
+  },
+  "UsePlayerAnimations": true,
+  "MaxStack": 1
+}

@@ -1,0 +1,30 @@
+{
+  "Parent": "Ymmersive_Equipment_Blueprint_Template",
+  "TranslationProperties": {
+    "Name": "items.Ymmersive_Equipment_Blueprint_Zoom_3.name",
+    "Description": "items.Ymmersive_Equipment_Blueprint.description"
+  },
+  "PlayerAnimationsId": "Ymmersive_Equipment_Blueprint_Zoom_3",
+  "Interactions": {
+    "Primary": {
+      "Interactions": [
+        {
+          "Type": "Ymmersive_Equipment_Swap_Item",
+          "Item": {
+            "Id": "Ymmersive_Equipment_Blueprint_Zoom_0"
+          }
+        }
+      ]
+    },
+    "Secondary": {
+      "Interactions": [
+        {
+          "Type": "Ymmersive_Equipment_Swap_Item",
+          "Item": {
+            "Id": "Ymmersive_Equipment_Blueprint_Zoom_2"
+          }
+        }
+      ]
+    }
+  }
+}

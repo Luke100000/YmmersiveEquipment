@@ -1,0 +1,10 @@
+{
+  "Parent": "Ymmersive_Equipment_Blueprint_Template",
+  "Camera": {
+    "PositionOffset": {
+      "Y": 8.7,
+      "X": 0.0,
+      "Z": 87.0
+    }
+  }
+}

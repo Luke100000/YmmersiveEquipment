@@ -1,0 +1,21 @@
+{
+  "Group": "Conczin",
+  "Name": "Ymmersive Equipment",
+  "Version": "0.0.1",
+  "Description": "Various handy tools.",
+  "Authors": [
+    {
+      "Name": "Conczin",
+      "Email": "conczin@gmail.com",
+      "Url": "https://conczin.net/"
+    }
+  ],
+  "Website": "https://conczin.net/",
+  "Main": "net.conczin.equipment.YmmersiveEquipment",
+  "ServerVersion": "*",
+  "Dependencies": {},
+  "OptionalDependencies": {},
+  "DisabledByDefault": false,
+  "IncludesAssetPack": true,
+  "SubPlugins": []
+}
