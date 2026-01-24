@@ -2,43 +2,43 @@
   "Categories": [
     "Items.Utility"
   ],
-  "Icon": "Icons/ItemsGenerated/Ymmersive_Equipment_Spyglass.png",
+  "Icon": "Icons/ItemsGenerated/Ymmersive_Equipment_Blueprint.png",
   "IconProperties": {
     "Scale": 0.6,
     "Rotation": [
-      311,
-      270,
-      0
+      318,
+      145,
+      15
     ],
     "Translation": [
-      -13,
-      -18
+      1,
+      -8
     ]
   },
   "Quality": "Common",
-  "Model": "Items/Ymmersive_Equipment_Spyglass.blockymodel",
-  "Texture": "Items/Ymmersive_Equipment_Spyglass.png",
+  "ItemLevel": 10,
+  "Model": "Items/Ymmersive_Equipment_Blueprint.blockymodel",
+  "Texture": "Items/Ymmersive_Equipment_Blueprint.png",
   "Tags": {
     "Type": [
       "Utility"
     ]
   },
   "UsePlayerAnimations": true,
-  "PlayerAnimationsId": "Ymmersive_Equipment_Spyglass",
+  "PlayerAnimationsId": "Ymmersive_Equipment_Blueprint",
   "Interactions": {
     "Primary": {
       "Interactions": [
         {
           "Type": "Ymmersive_Equipment_Update_Camera",
-          "Overlay": "Spyglass",
-          "Sound": "Spyglass",
+          "Sound": "Blueprint",
           "Action": "ZoomIn",
           "ZoomLevels": [
-            35,
+            30,
             60,
-            80
+            90
           ],
-          "CameraMode": "Spyglass"
+          "CameraMode": "Map"
         }
       ]
     },
@@ -46,15 +46,14 @@
       "Interactions": [
         {
           "Type": "Ymmersive_Equipment_Update_Camera",
-          "Overlay": "Spyglass",
-          "Sound": "Spyglass",
+          "Sound": "Blueprint",
           "Action": "ZoomOut",
           "ZoomLevels": [
-            35,
+            30,
             60,
-            80
+            90
           ],
-          "CameraMode": "Spyglass"
+          "CameraMode": "Map"
         }
       ]
     },
@@ -62,15 +61,14 @@
       "Interactions": [
         {
           "Type": "Ymmersive_Equipment_Update_Camera",
-          "Overlay": "Spyglass",
-          "Sound": "Spyglass",
+          "Sound": "Blueprint",
           "Action": "Toggle",
           "ZoomLevels": [
-            35,
+            30,
             60,
-            80
+            90
           ],
-          "CameraMode": "Spyglass"
+          "CameraMode": "Map"
         }
       ]
     }
@@ -79,11 +77,7 @@
     "TimeSeconds": 2,
     "Input": [
       {
-        "ItemId": "Ingredient_Copper_Ingot",
-        "Quantity": 3
-      },
-      {
-        "ItemId": "Ingredient_Crystal_Blue",
+        "ItemId": "Ingredient_Leather_Light",
         "Quantity": 2
       }
     ],

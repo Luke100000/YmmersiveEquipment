@@ -5,6 +5,7 @@ import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import net.conczin.equipment.interactions.SwapItemInteraction;
 import net.conczin.equipment.interactions.UpdateCameraInteraction;
+import net.conczin.equipment.systems.CameraSystem;
 
 import javax.annotation.Nonnull;
 
@@ -21,6 +22,8 @@ public class YmmersiveEquipment extends JavaPlugin {
     protected void setup() {
         this.getCodecRegistry(Interaction.CODEC).register("Ymmersive_Equipment_Swap_Item", SwapItemInteraction.class, SwapItemInteraction.CODEC);
         this.getCodecRegistry(Interaction.CODEC).register("Ymmersive_Equipment_Update_Camera", UpdateCameraInteraction.class, UpdateCameraInteraction.CODEC);
+
+        this.getEntityStoreRegistry().registerSystem(new CameraSystem());
     }
 
     public static YmmersiveEquipment getInstance() {

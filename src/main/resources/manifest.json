@@ -13,8 +13,11 @@
   "Website": "https://conczin.net/",
   "Main": "net.conczin.equipment.YmmersiveEquipment",
   "ServerVersion": "*",
-  "Dependencies": {},
-  "OptionalDependencies": {},
+  "Dependencies": {
+  },
+  "OptionalDependencies": {
+    "Buuz135:MultipleHUD": "*"
+  },
   "DisabledByDefault": false,
   "IncludesAssetPack": true,
   "SubPlugins": []

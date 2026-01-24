@@ -1,0 +1,44 @@
+@Texture = PatchStyle(TexturePath: "Overlay.png");
+@TextureStats = PatchStyle(TexturePath: "Info.png");
+
+Group {
+    Background: @Texture;
+    LayoutMode: CenterMiddle;
+    Anchor: (Top: 0, Left: 0);
+
+    Group {
+        Anchor: (Top: -500);
+
+        Group {
+            Background: @TextureStats;
+            LayoutMode: MiddleCenter;
+            Anchor: (Top: 0, Left: 0, Width: 200, Height: 200);
+
+            Label #ZoomLabel {
+                Text: "1x";
+                Style: LabelStyle(FontSize: 24, TextColor: #B5A642, Alignment: Center, RenderBold: true);
+            }
+
+            Label {
+                Text: %server.customUI.YmmersiveEquipment.zoom;
+                Style: LabelStyle(FontSize: 12, TextColor: #B5A642, Alignment: Center, RenderBold: true);
+            }
+        }
+
+        Group {
+            Background: @TextureStats;
+            LayoutMode: MiddleCenter;
+            Anchor: (Top: 0, Left: 1300, Width: 200, Height: 200);
+
+            Label #DistanceLabel {
+                Text: "1m";
+                Style: LabelStyle(FontSize: 24, TextColor: #B5A642, Alignment: Center, RenderBold: true);
+            }
+
+            Label {
+                Text: %server.customUI.YmmersiveEquipment.distance;
+                Style: LabelStyle(FontSize: 12, TextColor: #B5A642, Alignment: Center, RenderBold: true);
+            }
+        }
+    }
+}

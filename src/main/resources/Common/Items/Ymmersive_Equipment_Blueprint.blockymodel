@@ -3,7 +3,7 @@
     {
       "id": "1",
       "name": "R-Attachment",
-      "position": {"x": -2, "y": 13, "z": -8},
+      "position": {"x": 21, "y": -4, "z": -2},
       "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
       "shape": {
         "type": "none",
@@ -22,7 +22,7 @@
         {
           "id": "2",
           "name": "Origin_Projectile",
-          "position": {"x": 2, "y": 7, "z": 14},
+          "position": {"x": -12, "y": 15, "z": 14},
           "orientation": {"x": 0.38268, "y": 0, "z": 0, "w": 0.92388},
           "shape": {
             "type": "none",
@@ -41,7 +41,7 @@
             {
               "id": "3",
               "name": "Origin_Item",
-              "position": {"x": 0, "y": -9.19239, "z": 0.70711},
+              "position": {"x": 0, "y": -11.31371, "z": 2.82843},
               "orientation": {"x": -0.38268, "y": 0, "z": 0, "w": 0.92388},
               "shape": {
                 "type": "none",
@@ -59,25 +59,122 @@
               "children": [
                 {
                   "id": "4",
-                  "name": "Handle",
-                  "position": {"x": 0.03741, "y": 0.21356, "z": 2},
-                  "orientation": {"x": 0.5, "y": -0.5, "z": 0.5, "w": 0.5},
+                  "name": "Book-Bot--C1",
+                  "position": {"x": -10.17615, "y": 10.25097, "z": -16},
+                  "orientation": {"x": 0, "y": -0.99406, "z": 0.10887, "w": 0},
                   "shape": {
                     "type": "box",
-                    "offset": {"x": -2, "y": 0.03741, "z": -2.78644},
+                    "offset": {"x": -1, "y": 0, "z": 2.5},
                     "stretch": {"x": 1, "y": 1, "z": 1},
                     "settings": {
                       "isPiece": false,
-                      "size": {"x": 20, "y": 0, "z": 22}
+                      "size": {"x": 34, "y": 0, "z": 5},
+                      "isStaticBox": true
                     },
                     "textureLayout": {
                       "top": {
-                        "offset": {"x": 41, "y": 29},
+                        "offset": {"x": 10, "y": 42},
                         "mirror": {"x": false, "y": false},
                         "angle": 0
                       },
                       "bottom": {
-                        "offset": {"x": 41, "y": 51},
+                        "offset": {"x": 44, "y": 47},
+                        "mirror": {"x": false, "y": false},
+                        "angle": 180
+                      }
+                    },
+                    "unwrapMode": "custom",
+                    "visible": true,
+                    "doubleSided": false,
+                    "shadingMode": "standard"
+                  }
+                },
+                {
+                  "id": "5",
+                  "name": "Book-Bot--C2",
+                  "position": {"x": -10.17615, "y": 9.20097, "z": -20.8},
+                  "orientation": {"x": 0, "y": -0.91531, "z": 0.40275, "w": 0},
+                  "shape": {
+                    "type": "box",
+                    "offset": {"x": -1, "y": 0, "z": 2.5},
+                    "stretch": {"x": 1, "y": 1, "z": 1},
+                    "settings": {
+                      "isPiece": false,
+                      "size": {"x": 34, "y": 0, "z": 5},
+                      "isStaticBox": true
+                    },
+                    "textureLayout": {
+                      "top": {
+                        "offset": {"x": 44, "y": 47},
+                        "mirror": {"x": true, "y": false},
+                        "angle": 0
+                      },
+                      "bottom": {
+                        "offset": {"x": 44, "y": 52},
+                        "mirror": {"x": false, "y": false},
+                        "angle": 180
+                      }
+                    },
+                    "unwrapMode": "custom",
+                    "visible": true,
+                    "doubleSided": false,
+                    "shadingMode": "standard"
+                  }
+                },
+                {
+                  "id": "6",
+                  "name": "Book-Bot--C3",
+                  "position": {"x": -10.17615, "y": 12.45097, "z": 10.5},
+                  "orientation": {"x": 0, "y": -0.9763, "z": 0.21644, "w": 0},
+                  "shape": {
+                    "type": "box",
+                    "offset": {"x": -1, "y": 0, "z": 2.5},
+                    "stretch": {"x": 1, "y": 1, "z": 1},
+                    "settings": {
+                      "isPiece": false,
+                      "size": {"x": 34, "y": 0, "z": 5},
+                      "isStaticBox": true
+                    },
+                    "textureLayout": {
+                      "top": {
+                        "offset": {"x": 44, "y": 15},
+                        "mirror": {"x": true, "y": false},
+                        "angle": 0
+                      },
+                      "bottom": {
+                        "offset": {"x": 44, "y": 20},
+                        "mirror": {"x": false, "y": false},
+                        "angle": 180
+                      }
+                    },
+                    "unwrapMode": "custom",
+                    "visible": true,
+                    "doubleSided": false,
+                    "shadingMode": "standard"
+                  }
+                },
+                {
+                  "id": "7",
+                  "name": "Handle--C4",
+                  "position": {"x": -10.17615, "y": 10.25097, "z": -5},
+                  "orientation": {"x": 0, "y": 1, "z": 0, "w": 0},
+                  "shape": {
+                    "type": "box",
+                    "offset": {"x": -1, "y": 0, "z": 0},
+                    "stretch": {"x": 1, "y": 1, "z": 1},
+                    "settings": {
+                      "isPiece": false,
+                      "size": {"x": 34, "y": 0, "z": 22},
+                      "isStaticBox": true
+                    },
+                    "textureLayout": {
+                      "top": {
+                        "offset": {"x": 10, "y": 20},
+                        "mirror": {"x": false, "y": false},
+                        "angle": 0
+                      },
+                      "bottom": {
+                        "offset": {"x": 10, "y": 42},
                         "mirror": {"x": true, "y": false},
                         "angle": 180
                       }
@@ -86,179 +183,7 @@
                     "visible": true,
                     "doubleSided": false,
                     "shadingMode": "standard"
-                  },
-                  "children": [
-                    {
-                      "id": "5",
-                      "name": "Book-Bot",
-                      "position": {"x": 6, "y": 0.5, "z": -2},
-                      "orientation": {"x": 0, "y": -0.38268, "z": 0, "w": 0.92388},
-                      "shape": {
-                        "type": "box",
-                        "offset": {"x": 0, "y": 0, "z": 0},
-                        "stretch": {"x": 1, "y": 1, "z": 1},
-                        "settings": {
-                          "isPiece": false,
-                          "size": {"x": 4, "y": 1, "z": 4},
-                          "isStaticBox": true
-                        },
-                        "textureLayout": {
-                          "back": {
-                            "offset": {"x": 32, "y": 25},
-                            "mirror": {"x": false, "y": false},
-                            "angle": 0
-                          },
-                          "right": {
-                            "offset": {"x": 32, "y": 30},
-                            "mirror": {"x": false, "y": false},
-                            "angle": 0
-                          },
-                          "front": {
-                            "offset": {"x": 31, "y": 30},
-                            "mirror": {"x": false, "y": false},
-                            "angle": 270
-                          },
-                          "left": {
-                            "offset": {"x": 36, "y": 30},
-                            "mirror": {"x": false, "y": false},
-                            "angle": 270
-                          },
-                          "top": {
-                            "offset": {"x": 32, "y": 26},
-                            "mirror": {"x": false, "y": false},
-                            "angle": 0
-                          }
-                        },
-                        "unwrapMode": "custom",
-                        "visible": true,
-                        "doubleSided": false,
-                        "shadingMode": "standard"
-                      }
-                    },
-                    {
-                      "id": "6",
-                      "name": "Book-Bot",
-                      "position": {"x": 6, "y": 0.5, "z": -0.4},
-                      "orientation": {"x": 0, "y": -0.70711, "z": 0, "w": 0.70711},
-                      "shape": {
-                        "type": "box",
-                        "offset": {"x": 2, "y": 0, "z": 0},
-                        "stretch": {"x": 1, "y": 1, "z": 1},
-                        "settings": {
-                          "isPiece": false,
-                          "size": {"x": 4, "y": 0, "z": 2},
-                          "isStaticBox": true
-                        },
-                        "textureLayout": {
-                          "top": {
-                            "offset": {"x": 32, "y": 34},
-                            "mirror": {"x": false, "y": false},
-                            "angle": 0
-                          }
-                        },
-                        "unwrapMode": "custom",
-                        "visible": true,
-                        "doubleSided": false,
-                        "shadingMode": "standard"
-                      }
-                    },
-                    {
-                      "id": "7",
-                      "name": "Book-Bot",
-                      "position": {"x": 0, "y": 0, "z": 11},
-                      "orientation": {"x": -0.34202, "y": 0, "z": 0, "w": 0.93969},
-                      "shape": {
-                        "type": "box",
-                        "offset": {"x": 0, "y": 0, "z": 2.5},
-                        "stretch": {"x": 1, "y": 1, "z": 1},
-                        "settings": {
-                          "isPiece": false,
-                          "size": {"x": 20, "y": 0, "z": 5},
-                          "isStaticBox": true
-                        },
-                        "textureLayout": {
-                          "top": {
-                            "offset": {"x": 41, "y": 51},
-                            "mirror": {"x": false, "y": false},
-                            "angle": 0
-                          },
-                          "bottom": {
-                            "offset": {"x": 61, "y": 56},
-                            "mirror": {"x": false, "y": false},
-                            "angle": 180
-                          }
-                        },
-                        "unwrapMode": "custom",
-                        "visible": true,
-                        "doubleSided": false,
-                        "shadingMode": "standard"
-                      }
-                    },
-                    {
-                      "id": "8",
-                      "name": "Book-Bot",
-                      "position": {"x": 0, "y": 3.2, "z": 14.8},
-                      "orientation": {"x": -0.59131, "y": 0, "z": 0, "w": 0.80644},
-                      "shape": {
-                        "type": "box",
-                        "offset": {"x": 0, "y": 0, "z": 2.5},
-                        "stretch": {"x": 1, "y": 1, "z": 1},
-                        "settings": {
-                          "isPiece": false,
-                          "size": {"x": 20, "y": 0, "z": 5},
-                          "isStaticBox": true
-                        },
-                        "textureLayout": {
-                          "top": {
-                            "offset": {"x": 61, "y": 56},
-                            "mirror": {"x": true, "y": false},
-                            "angle": 0
-                          },
-                          "bottom": {
-                            "offset": {"x": 61, "y": 61},
-                            "mirror": {"x": false, "y": false},
-                            "angle": 180
-                          }
-                        },
-                        "unwrapMode": "custom",
-                        "visible": true,
-                        "doubleSided": false,
-                        "shadingMode": "standard"
-                      }
-                    },
-                    {
-                      "id": "9",
-                      "name": "Book-Bot",
-                      "position": {"x": 0, "y": -4.8, "z": -12.5},
-                      "orientation": {"x": -0.59131, "y": 0, "z": 0, "w": 0.80644},
-                      "shape": {
-                        "type": "box",
-                        "offset": {"x": 0, "y": 0, "z": 2.5},
-                        "stretch": {"x": 1, "y": 1, "z": 1},
-                        "settings": {
-                          "isPiece": false,
-                          "size": {"x": 20, "y": 0, "z": 5},
-                          "isStaticBox": true
-                        },
-                        "textureLayout": {
-                          "top": {
-                            "offset": {"x": 61, "y": 24},
-                            "mirror": {"x": true, "y": false},
-                            "angle": 0
-                          },
-                          "bottom": {
-                            "offset": {"x": 61, "y": 29},
-                            "mirror": {"x": false, "y": false},
-                            "angle": 180
-                          }
-                        },
-                        "unwrapMode": "custom",
-                        "visible": true,
-                        "doubleSided": false,
-                        "shadingMode": "standard"
-                      }
-                    }
-                  ]
+                  }
                 }
               ]
             }
@@ -267,5 +192,6 @@
       ]
     }
   ],
+  "format": "character",
   "lod": "auto"
 }

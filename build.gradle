@@ -19,6 +19,9 @@ java {
 
 repositories {
     mavenCentral()
+    maven {
+        url = uri("https://maven.hytale-mods.dev/releases")
+    }
 }
 
 def isLinux = System.getProperty("os.name").toLowerCase().contains("linux")
@@ -35,6 +38,7 @@ def hytaleSourcesJar = "$hytaleBasePath/install/$patchline/package/game/latest/S
 
 dependencies {
     implementation(files(hytaleJar))
+    implementation("com.buuz135:MultipleHUD:${multipleHudVersion}")
 }
 
 def getAppVersion = {

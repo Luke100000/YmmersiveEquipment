@@ -1,0 +1,4 @@
+Group {
+  LayoutMode: Left;
+  Anchor: (Top: 0, Left: 0);
+}
