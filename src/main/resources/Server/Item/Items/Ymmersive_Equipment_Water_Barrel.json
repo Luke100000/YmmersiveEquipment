@@ -1,0 +1,138 @@
+  {
+    "TranslationProperties": {
+      "Name": "server.items.Ymmersive_Equipment_Water_Barrel.name",
+      "Description": "server.items.Ymmersive_Equipment_Water_Barrel.description"
+    },
+    "Icon": "Icons/ItemsGenerated/Ymmersive_Equipment_Water_Barrel.png",
+    "ItemLevel": 15,
+    "MaxStack": 1,
+    "Model": "Items/Ymmersive_Equipment_Water_Barrel.blockymodel",
+    "Texture": "Items/Ymmersive_Equipment_Water_Barrel.png",
+    "IconProperties": {
+      "Scale": 0.6,
+      "Rotation": [
+        0,
+        121,
+        25
+      ],
+      "Translation": [
+        -3,
+        -17
+      ]
+    },
+    "Categories": [
+      "Furniture.Containers"
+    ],
+    "Recipe": {
+      "TimeSeconds": 1,
+      "KnowledgeRequired": false,
+      "Input": [
+        {
+          "Quantity": 12,
+          "ResourceTypeId": "Wood_All"
+        },
+        {
+          "ItemId": "Ingredient_Bar_Iron",
+          "Quantity": 4
+        }
+      ],
+      "BenchRequirement": [
+        {
+          "Id": "Farmingbench",
+          "Type": "Crafting",
+          "Categories": [
+            "Farming"
+          ]
+        }
+      ]
+    },
+    "Interactions": {
+      "Secondary": {
+        "Interactions": [
+          {
+            "Type": "Condition",
+            "Crouching": false,
+            "Next": {
+              "Type": "Ymmersive_Equipment_Refill_Container",
+              "Effects": {
+                "ClearSoundEventOnFinish": true,
+                "LocalSoundEventId": "SFX_Water_MoveIn"
+              },
+              "States": {
+                "Filled_Water": {
+                  "AllowedFluids": [
+                    "Water_Source"
+                  ],
+                  "TransformFluid": "Empty"
+                }
+              }
+            },
+            "Failed": "Block_Secondary"
+          }
+        ]
+      }
+    },
+    "State": {
+      "Filled_Water": {
+        "TranslationProperties": {
+          "Name": "server.items.Ymmersive_Equipment_Water_Barrel.water.name",
+          "Description": "server.items.Ymmersive_Equipment_Water_Barrel.description"
+        },
+        "Recipe": null,
+        "Interactions": {
+          "Primary": {
+            "Interactions": [
+              {
+                "Type": "PlaceFluid",
+                "RemoveItemInHand": false,
+                "Next": {
+                  "Type": "ModifyInventory",
+                  "AdjustHeldItemDurability": -1,
+                  "BrokenItem": "Ymmersive_Equipment_Water_Barrel"
+                },
+                "FluidToPlace": "Water_Source",
+                "Effects": {
+                  "ClearSoundEventOnFinish": true,
+                  "LocalSoundEventId": "SFX_WATER_MoveOut"
+                }
+              }
+            ]
+          },
+          "Secondary": {
+            "Interactions": [
+              {
+                "Type": "Condition",
+                "Crouching": false,
+                "Next": {
+                  "Type": "Ymmersive_Equipment_Refill_Container",
+                  "Effects": {
+                    "ClearSoundEventOnFinish": true,
+                    "LocalSoundEventId": "SFX_Water_MoveIn"
+                  },
+                  "States": {
+                    "Filled_Water": {
+                      "AllowedFluids": [
+                        "Water_Source"
+                      ],
+                      "TransformFluid": "Empty"
+                    }
+                  }
+                },
+                "Failed": "Block_Secondary"
+              }
+            ]
+          }
+        },
+        "Consumable": true,
+        "MaxDurability": 10,
+        "MaxStack": 1
+      }
+    },
+    "PlayerAnimationsId": "Item",
+    "Tags": {
+      "Type": [
+        "Container"
+      ]
+    },
+    "ItemSoundSetId": "ISS_Blocks_Wood"
+  }

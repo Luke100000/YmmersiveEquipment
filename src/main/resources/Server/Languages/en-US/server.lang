@@ -4,5 +4,9 @@ items.Ymmersive_Equipment_Blueprint.description = Plan your constructions more e
 items.Ymmersive_Equipment_Spyglass.name = Spyglass
 items.Ymmersive_Equipment_Spyglass.description = Observe distant objects with clarity.
 
+items.Ymmersive_Equipment_Water_Barrel.name = Water Barrel
+items.Ymmersive_Equipment_Water_Barrel.description = Carry and store a lot of water for your needs.
+items.Ymmersive_Equipment_Water_Barrel.water.name = Filled Water Barrel
+
 customUI.YmmersiveEquipment.distance = Distance
 customUI.YmmersiveEquipment.zoom = Zoom
