@@ -1,0 +1,103 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Ymmersive_Equipment_Orb_Of_Teleportation.name",
+    "Description": "server.items.Ymmersive_Equipment_Orb_Of_Teleportation.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Ymmersive_Equipment_Orb_Of_Teleportation.png",
+  "ItemLevel": 20,
+  "MaxStack": 1,
+  "MaxDurability": 10,
+  "Model": "Items/Ymmersive_Equipment_Orb_Of_Teleportation.blockymodel",
+  "Texture": "Items/Ymmersive_Equipment_Orb_Of_Teleportation.png",
+  "IconProperties": {
+    "Scale": 0.6,
+    "Rotation": [
+      0,
+      61,
+      39
+    ],
+    "Translation": [
+      3,
+      -11
+    ]
+  },
+  "Categories": [
+    "Items.Utility"
+  ],
+  "Recipe": {
+    "TimeSeconds": 5,
+    "KnowledgeRequired": false,
+    "Input": [
+      {
+        "ItemId": "Ingredient_Ice_Essence",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "Ingredient_Life_Essence",
+        "Quantity": 10
+      },
+      {
+        "ResourceTypeId": "Rock_Volcanic",
+        "Quantity": 3
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "Workbench",
+        "Type": "Crafting",
+        "Categories": [
+          "Workbench_Tools"
+        ]
+      }
+    ]
+  },
+  "Interactions": {
+    "Primary": {
+      "Interactions": [
+        {
+          "Type": "Ymmersive_Equipment_Remember_Position"
+        }
+      ]
+    }
+  },
+  "State": {
+    "Charged": {
+      "TranslationProperties": {
+        "Name": "server.items.Ymmersive_Equipment_Orb_Of_Teleportation.charged.name",
+        "Description": "server.items.Ymmersive_Equipment_Orb_Of_Teleportation.charged.description"
+      },
+      "Icon": "Icons/ItemsGenerated/Ymmersive_Equipment_Orb_Of_Teleportation_Charged.png",
+      "Texture": "Items/Ymmersive_Equipment_Orb_Of_Teleportation_Charged.png",
+      "Recipe": null,
+      "Interactions": {
+        "Primary": {
+          "Interactions": [
+            {
+              "Type": "ModifyInventory",
+              "AdjustHeldItemDurability": -1,
+              "BrokenItem": "Empty"
+            },
+            {
+              "Type": "Ymmersive_Equipment_Teleport"
+            }
+          ]
+        }
+      },
+      "Light": {
+        "Radius": 3,
+        "Color": "#7a5"
+      }
+    }
+  },
+  "PlayerAnimationsId": "Item",
+  "Tags": {
+    "Type": [
+      "Utility",
+      "Magic"
+    ]
+  },
+  "Light": {
+    "Radius": 1,
+    "Color": "#a44"
+  }
+}

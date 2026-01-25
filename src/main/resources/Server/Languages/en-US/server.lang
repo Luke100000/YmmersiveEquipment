@@ -8,5 +8,10 @@ items.Ymmersive_Equipment_Water_Barrel.name = Water Barrel
 items.Ymmersive_Equipment_Water_Barrel.description = Carry and store a lot of water for your needs.
 items.Ymmersive_Equipment_Water_Barrel.water.name = Filled Water Barrel
 
+items.Ymmersive_Equipment_Orb_Of_Teleportation.name = Orb of Teleportation
+items.Ymmersive_Equipment_Orb_Of_Teleportation.description = A teleportation orb that marks a position and recalls the user there on command.
+items.Ymmersive_Equipment_Orb_Of_Teleportation.charged.name = Charged Orb of Teleportation
+items.Ymmersive_Equipment_Orb_Of_Teleportation.charged.description = The orb glows with power and is ready to teleport the user.
+
 customUI.YmmersiveEquipment.distance = Distance
 customUI.YmmersiveEquipment.zoom = Zoom
