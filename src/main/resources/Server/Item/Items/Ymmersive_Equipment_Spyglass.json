@@ -7,7 +7,7 @@
     "Scale": 0.6,
     "Rotation": [
       311,
-      270,
+      316,
       0
     ],
     "Translation": [
@@ -79,7 +79,7 @@
     "TimeSeconds": 2,
     "Input": [
       {
-        "ItemId": "Ingredient_Copper_Ingot",
+        "ItemId": "Ingredient_Bar_Copper",
         "Quantity": 3
       },
       {
