@@ -12,8 +12,9 @@
   ],
   "Website": "https://conczin.net/",
   "Main": "net.conczin.equipment.YmmersiveEquipment",
-  "ServerVersion": "*",
+  "ServerVersion": "2026.02.17-255364b8e",
   "Dependencies": {
+    "Hytale:EntityModule": "*"
   },
   "OptionalDependencies": {
     "Buuz135:MultipleHUD": "*"
