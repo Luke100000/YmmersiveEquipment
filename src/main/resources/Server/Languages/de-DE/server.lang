@@ -1,0 +1,17 @@
+items.Ymmersive_Equipment_Blueprint.name = Bauplan
+items.Ymmersive_Equipment_Blueprint.description = Plane deine Konstruktionen effektiver von oben.
+
+items.Ymmersive_Equipment_Spyglass.name = Fernglas
+items.Ymmersive_Equipment_Spyglass.description = Beobachte entfernte Objekte mit Klarheit.
+
+items.Ymmersive_Equipment_Water_Barrel.name = Wasserfass
+items.Ymmersive_Equipment_Water_Barrel.description = Nimm eine Menge Wasser für deinen Bedarf mit und lagere es.
+items.Ymmersive_Equipment_Water_Barrel.water.name = Gefülltes Wasserfass
+
+items.Ymmersive_Equipment_Orb_Of_Teleportation.name = Teleportationsorb
+items.Ymmersive_Equipment_Orb_Of_Teleportation.description = Ein Teleportationsorb, der eine Position markiert und den Nutzer dort auf Befehl zurückteleportiert.
+items.Ymmersive_Equipment_Orb_Of_Teleportation.charged.name = Aufgeladener Teleportationsorb
+items.Ymmersive_Equipment_Orb_Of_Teleportation.charged.description = Die Kugel leuchtet voller Kraft und ist bereit, den Nutzer zu teleportieren.
+
+customUI.YmmersiveEquipment.distance = Distanz
+customUI.YmmersiveEquipment.zoom = Zoom

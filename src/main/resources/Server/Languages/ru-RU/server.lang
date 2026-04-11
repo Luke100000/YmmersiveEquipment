@@ -1,0 +1,17 @@
+items.Ymmersive_Equipment_Blueprint.name = Чертёж
+items.Ymmersive_Equipment_Blueprint.description = Планируйте стройку более эффективно свысока.
+
+items.Ymmersive_Equipment_Spyglass.name = Подзорная Труба
+items.Ymmersive_Equipment_Spyglass.description = Наблюдайте за далёкими объектами без проблем.
+
+items.Ymmersive_Equipment_Water_Barrel.name = Бочка для Воды
+items.Ymmersive_Equipment_Water_Barrel.description = Носите и храните много воды для ваших нужд.
+items.Ymmersive_Equipment_Water_Barrel.water.name = Наполненная Бочка для Воды
+
+items.Ymmersive_Equipment_Orb_Of_Teleportation.name = Сфера Телепортации
+items.Ymmersive_Equipment_Orb_Of_Teleportation.description = Сфера, которая запоминает позицию и по команде возвращает туда пользователя.
+items.Ymmersive_Equipment_Orb_Of_Teleportation.charged.name = Заряженная Сфера Телепортации
+items.Ymmersive_Equipment_Orb_Of_Teleportation.charged.description = Сфера светится от силы и готова телепортировать пользователя.
+
+customUI.YmmersiveEquipment.distance = Дистанция
+customUI.YmmersiveEquipment.zoom = Масштаб
