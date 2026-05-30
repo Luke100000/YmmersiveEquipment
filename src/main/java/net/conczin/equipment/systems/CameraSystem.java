@@ -4,14 +4,12 @@ import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.tick.EntityTickingSystem;
 import com.hypixel.hytale.math.vector.Transform;
-import com.hypixel.hytale.math.vector.Vector3d;
-import com.hypixel.hytale.math.vector.Vector3i;
 import com.hypixel.hytale.protocol.*;
 import com.hypixel.hytale.protocol.packets.camera.SetServerCamera;
 import com.hypixel.hytale.server.core.asset.type.blocktype.config.BlockType;
-import com.hypixel.hytale.server.core.entity.EntityUtils;
 import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
+import com.hypixel.hytale.server.core.inventory.InventoryComponent;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
@@ -23,6 +21,8 @@ import net.conczin.equipment.ui.OverlayHud;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import org.joml.Vector3d;
+import org.joml.Vector3i;
 
 
 public class CameraSystem extends EntityTickingSystem<EntityStore> {
@@ -40,13 +40,13 @@ public class CameraSystem extends EntityTickingSystem<EntityStore> {
 
     @Override
     public void tick(float dt, int index, @Nonnull ArchetypeChunk<EntityStore> chunk, @Nonnull Store<EntityStore> store, @Nonnull CommandBuffer<EntityStore> commandBuffer) {
-        Holder<EntityStore> holder = EntityUtils.toHolder(index, chunk);
-        Player player = holder.getComponent(Player.getComponentType());
-        PlayerRef playerRef = holder.getComponent(PlayerRef.getComponentType());
+        Ref<EntityStore> ref = chunk.getReferenceTo(index);
+        Player player = commandBuffer.getComponent(ref, Player.getComponentType());
+        PlayerRef playerRef = commandBuffer.getComponent(ref, PlayerRef.getComponentType());
         if (player != null && playerRef != null) {
             CameraStates.CameraState state = CameraStates.getZoomState(playerRef.getUuid());
 
-            boolean b = hasEquipped(player, state);
+            boolean b = hasEquipped(ref, commandBuffer, state);
 
             if (state.active && !b) {
                 state.active = false;
@@ -94,9 +94,9 @@ public class CameraSystem extends EntityTickingSystem<EntityStore> {
         }
     }
 
-    private static boolean hasEquipped(Player player, CameraStates.CameraState state) {
-        ItemStack mainHand = player.getInventory().getItemInHand();
-        ItemStack offHand = player.getInventory().getUtilityItem();
+    private static boolean hasEquipped(Ref<EntityStore> ref, CommandBuffer<EntityStore> commandBuffer, CameraStates.CameraState state) {
+        ItemStack mainHand = InventoryComponent.getItemInHand(commandBuffer, ref);
+        ItemStack offHand = commandBuffer.getComponent(ref, InventoryComponent.Utility.getComponentType()).getActiveItem();
         boolean inMainHand = mainHand != null && state.lastEquippedItem.equals(mainHand.getItemId());
         boolean inOffHand = offHand != null && state.lastEquippedItem.equals(offHand.getItemId());
         return inMainHand || inOffHand;

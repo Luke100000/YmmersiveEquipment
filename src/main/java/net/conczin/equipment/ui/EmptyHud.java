@@ -8,7 +8,7 @@ import javax.annotation.Nonnull;
 
 public class EmptyHud extends CustomUIHud {
     public EmptyHud(@Nonnull PlayerRef playerRef) {
-        super(playerRef);
+        super(playerRef, "YmmersiveEquipment/Empty", 0);
     }
 
     @Override

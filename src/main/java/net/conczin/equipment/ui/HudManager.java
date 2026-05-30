@@ -12,7 +12,7 @@ public class HudManager {
     public static void setHud(Player player, PlayerRef playerRef, String identifier, CustomUIHud hud) {
         PluginBase plugin = PluginManager.get().getPlugin(PluginIdentifier.fromString("Buuz135:MultipleHUD"));
         if (plugin == null) {
-            player.getHudManager().setCustomHud(playerRef, hud);
+            player.getHudManager().addCustomHud(playerRef, hud);
         } else {
             MultipleHUD.getInstance().setCustomHud(player, playerRef, identifier, hud);
         }

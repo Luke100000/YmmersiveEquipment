@@ -10,8 +10,7 @@ import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.math.iterator.BlockIterator;
 import com.hypixel.hytale.math.util.ChunkUtil;
-import com.hypixel.hytale.math.util.MathUtil;
-import com.hypixel.hytale.math.vector.Vector3d;
+import org.joml.Vector3d;
 import com.hypixel.hytale.protocol.InteractionState;
 import com.hypixel.hytale.protocol.InteractionSyncData;
 import com.hypixel.hytale.protocol.InteractionType;
@@ -21,7 +20,7 @@ import com.hypixel.hytale.server.core.asset.type.fluid.FluidTicker;
 import com.hypixel.hytale.server.core.asset.type.item.config.Item;
 import com.hypixel.hytale.server.core.entity.InteractionContext;
 import com.hypixel.hytale.server.core.entity.entities.Player;
-import com.hypixel.hytale.server.core.inventory.Inventory;
+import com.hypixel.hytale.server.core.inventory.InventoryComponent;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.inventory.container.SimpleItemContainer;
 import com.hypixel.hytale.server.core.inventory.transaction.ItemStackSlotTransaction;
@@ -121,157 +120,152 @@ public class FillContainerInteraction extends SimpleInstantInteraction {
             if (player == null) {
                 interactionsyncdata.state = InteractionState.Failed;
             } else {
-                Inventory inventory = player.getInventory();
-                if (inventory == null) {
+                TransformComponent transformcomponent = commandbuffer.getComponent(ref, TransformComponent.getComponentType());
+                if (transformcomponent == null) {
                     interactionsyncdata.state = InteractionState.Failed;
                 } else {
-                    TransformComponent transformcomponent = commandbuffer.getComponent(ref, TransformComponent.getComponentType());
-                    if (transformcomponent == null) {
+                    HeadRotation headrotation = commandbuffer.getComponent(ref, HeadRotation.getComponentType());
+                    if (headrotation == null) {
                         interactionsyncdata.state = InteractionState.Failed;
                     } else {
-                        HeadRotation headrotation = commandbuffer.getComponent(ref, HeadRotation.getComponentType());
-                        if (headrotation == null) {
+                        ModelComponent modelcomponent = commandbuffer.getComponent(ref, ModelComponent.getComponentType());
+                        if (modelcomponent == null) {
                             interactionsyncdata.state = InteractionState.Failed;
                         } else {
-                            ModelComponent modelcomponent = commandbuffer.getComponent(ref, ModelComponent.getComponentType());
-                            if (modelcomponent == null) {
+                            ItemStack itemstack = context.getHeldItem();
+                            if (itemstack == null) {
                                 interactionsyncdata.state = InteractionState.Failed;
                             } else {
-                                ItemStack itemstack = context.getHeldItem();
-                                if (itemstack == null) {
-                                    interactionsyncdata.state = InteractionState.Failed;
-                                } else {
-                                    InteractionConfiguration interactionconfiguration = itemstack.getItem().getInteractionConfig();
-                                    float f = interactionconfiguration.getUseDistance(player.getGameMode());
-                                    Vector3d vector3d = transformcomponent.getPosition().clone();
-                                    vector3d.y = vector3d.y + modelcomponent.getModel().getEyeHeight(ref, commandbuffer);
-                                    Vector3d vector3d1 = headrotation.getDirection();
-                                    Vector3d vector3d2 = vector3d.clone().add(vector3d1.scale(f));
-                                    AtomicBoolean atomicboolean = new AtomicBoolean(false);
-                                    BlockIterator.iterateFromTo(
-                                            vector3d,
-                                            vector3d2,
-                                            (x, y, z, _, _, _, _, _, _) -> {
-                                                Ref<ChunkStore> ref2 = world.getChunkStore()
-                                                        .getChunkSectionReference(
-                                                                ChunkUtil.chunkCoordinate(x), ChunkUtil.chunkCoordinate(y), ChunkUtil.chunkCoordinate(z)
-                                                        );
-                                                if (ref2 == null) {
+                                InteractionConfiguration interactionconfiguration = itemstack.getItem().getInteractionConfig();
+                                float f = interactionconfiguration.getUseDistance(player.getGameMode());
+                                Vector3d vector3d = transformcomponent.getPosition();
+                                vector3d.y = vector3d.y + modelcomponent.getModel().getEyeHeight();
+                                Vector3d vector3d1 = headrotation.getDirection();
+                                Vector3d vector3d2 = new Vector3d(vector3d).add(vector3d1.mul(f));
+                                AtomicBoolean atomicboolean = new AtomicBoolean(false);
+                                BlockIterator.iterateFromTo(
+                                        vector3d,
+                                        vector3d2,
+                                        (x, y, z, _, _, _, _, _, _) -> {
+                                            Ref<ChunkStore> ref2 = world.getChunkStore()
+                                                    .getChunkSectionReference(
+                                                            ChunkUtil.chunkCoordinate(x), ChunkUtil.chunkCoordinate(y), ChunkUtil.chunkCoordinate(z)
+                                                    );
+                                            if (ref2 == null) {
+                                                return true;
+                                            } else {
+                                                BlockSection blocksection = ref2.getStore().getComponent(ref2, BlockSection.getComponentType());
+                                                if (blocksection == null) {
                                                     return true;
+                                                } else if (FluidTicker.isSolid(BlockType.getAssetMap().getAsset(blocksection.get(x, y, z)))) {
+                                                    interactionsyncdata.state = InteractionState.Failed;
+                                                    return false;
                                                 } else {
-                                                    BlockSection blocksection = ref2.getStore().getComponent(ref2, BlockSection.getComponentType());
-                                                    if (blocksection == null) {
+                                                    FluidSection fluidsection = ref2.getStore().getComponent(ref2, FluidSection.getComponentType());
+                                                    if (fluidsection == null) {
                                                         return true;
-                                                    } else if (FluidTicker.isSolid(BlockType.getAssetMap().getAsset(blocksection.get(x, y, z)))) {
-                                                        interactionsyncdata.state = InteractionState.Failed;
-                                                        return false;
                                                     } else {
-                                                        FluidSection fluidsection = ref2.getStore().getComponent(ref2, FluidSection.getComponentType());
-                                                        if (fluidsection == null) {
+                                                        int i = fluidsection.getFluidId(x, y, z);
+                                                        int[] aint = this.getAllowedFluidIds();
+                                                        if (aint != null && Arrays.binarySearch(aint, i) < 0) {
+                                                            interactionsyncdata.state = InteractionState.Failed;
                                                             return true;
                                                         } else {
-                                                            int i = fluidsection.getFluidId(x, y, z);
-                                                            int[] aint = this.getAllowedFluidIds();
-                                                            if (aint != null && Arrays.binarySearch(aint, i) < 0) {
+                                                            String s = this.getFluidToState().get(i);
+                                                            if (s == null) {
                                                                 interactionsyncdata.state = InteractionState.Failed;
-                                                                return true;
+                                                                return false;
                                                             } else {
-                                                                String s = this.getFluidToState().get(i);
-                                                                if (s == null) {
+                                                                ItemStack itemstack1 = context.getHeldItem();
+                                                                Item item = itemstack1.getItem().getItemForState(s);
+                                                                if (item == null) {
                                                                     interactionsyncdata.state = InteractionState.Failed;
                                                                     return false;
                                                                 } else {
-                                                                    ItemStack itemstack1 = context.getHeldItem();
-                                                                    Item item = itemstack1.getItem().getItemForState(s);
-                                                                    if (item == null) {
-                                                                        interactionsyncdata.state = InteractionState.Failed;
-                                                                        return false;
-                                                                    } else {
-                                                                        FillContainerInteraction.RefillState refillcontainerinteraction$refillstate = this.refillStateMap
-                                                                                .get(s);
-                                                                        if (item.getId().equals(itemstack1.getItemId())) {
-                                                                            if (refillcontainerinteraction$refillstate != null) {
-                                                                                if (itemstack1.getDurability() + refillcontainerinteraction$refillstate.durability > itemstack1.getMaxDurability()) {
-                                                                                    interactionsyncdata.state = InteractionState.Failed;
-                                                                                    return false;
-                                                                                }
-
-                                                                                ItemStack itemstack3 = itemstack1.withIncreasedDurability(refillcontainerinteraction$refillstate.durability);
-                                                                                ItemStackSlotTransaction itemstackslottransaction = context.getHeldItemContainer()
-                                                                                        .setItemStackForSlot(context.getHeldItemSlot(), itemstack3);
-                                                                                if (!itemstackslottransaction.succeeded()) {
-                                                                                    interactionsyncdata.state = InteractionState.Failed;
-                                                                                    return false;
-                                                                                }
-
-                                                                                context.setHeldItem(itemstack3);
-                                                                                atomicboolean.set(true);
-                                                                            }
-                                                                        } else {
-                                                                            ItemStackSlotTransaction itemstackslottransaction1 = context.getHeldItemContainer()
-                                                                                    .removeItemStackFromSlot(context.getHeldItemSlot(), itemstack1, 1);
-                                                                            if (!itemstackslottransaction1.succeeded()) {
+                                                                    FillContainerInteraction.RefillState refillcontainerinteraction$refillstate = this.refillStateMap
+                                                                            .get(s);
+                                                                    if (item.getId().equals(itemstack1.getItemId())) {
+                                                                        if (refillcontainerinteraction$refillstate != null) {
+                                                                            if (itemstack1.getDurability() + refillcontainerinteraction$refillstate.durability > itemstack1.getMaxDurability()) {
                                                                                 interactionsyncdata.state = InteractionState.Failed;
                                                                                 return false;
                                                                             }
 
-                                                                            ItemStack itemstack2 = new ItemStack(item.getId(), 1);
-                                                                            if (refillcontainerinteraction$refillstate != null
-                                                                                && refillcontainerinteraction$refillstate.durability > 0.0) {
-                                                                                itemstack2 = itemstack2.withDurability(
-                                                                                        refillcontainerinteraction$refillstate.durability
-                                                                                );
-                                                                            }
-
-                                                                            if (itemstack1.getQuantity() == 1) {
-                                                                                ItemStackSlotTransaction itemstackslottransaction2 = context.getHeldItemContainer()
-                                                                                        .setItemStackForSlot(context.getHeldItemSlot(), itemstack2);
-                                                                                if (!itemstackslottransaction2.succeeded()) {
-                                                                                    interactionsyncdata.state = InteractionState.Failed;
-                                                                                    return false;
-                                                                                }
-
-                                                                                context.setHeldItem(itemstack2);
-                                                                            } else {
-                                                                                SimpleItemContainer.addOrDropItemStack(
-                                                                                        commandbuffer, ref, inventory.getCombinedHotbarFirst(), itemstack2
-                                                                                );
-                                                                                context.setHeldItem(
-                                                                                        context.getHeldItemContainer().getItemStack(context.getHeldItemSlot())
-                                                                                );
-                                                                            }
-                                                                        }
-
-                                                                        if (refillcontainerinteraction$refillstate != null
-                                                                            && refillcontainerinteraction$refillstate.getTransformFluid() != null) {
-                                                                            int j = Fluid.getFluidIdOrUnknown(
-                                                                                    refillcontainerinteraction$refillstate.getTransformFluid(),
-                                                                                    "Unknown fluid %s",
-                                                                                    refillcontainerinteraction$refillstate.getTransformFluid()
-                                                                            );
-                                                                            boolean flag = fluidsection.setFluid(
-                                                                                    x, y, z, j, (byte) Fluid.getAssetMap().getAsset(j).getMaxFluidLevel()
-                                                                            );
-                                                                            if (!flag) {
+                                                                            ItemStack itemstack3 = itemstack1.withIncreasedDurability(refillcontainerinteraction$refillstate.durability);
+                                                                            ItemStackSlotTransaction itemstackslottransaction = context.getHeldItemContainer()
+                                                                                    .setItemStackForSlot(context.getHeldItemSlot(), itemstack3);
+                                                                            if (!itemstackslottransaction.succeeded()) {
                                                                                 interactionsyncdata.state = InteractionState.Failed;
+                                                                                return false;
                                                                             }
 
-                                                                            world.performBlockUpdate(x, y, z);
+                                                                            context.setHeldItem(itemstack3);
                                                                             atomicboolean.set(true);
                                                                         }
+                                                                    } else {
+                                                                        ItemStackSlotTransaction itemstackslottransaction1 = context.getHeldItemContainer()
+                                                                                .removeItemStackFromSlot(context.getHeldItemSlot(), itemstack1, 1);
+                                                                        if (!itemstackslottransaction1.succeeded()) {
+                                                                            interactionsyncdata.state = InteractionState.Failed;
+                                                                            return false;
+                                                                        }
 
-                                                                        return false;
+                                                                        ItemStack itemstack2 = new ItemStack(item.getId(), 1);
+                                                                        if (refillcontainerinteraction$refillstate != null
+                                                                            && refillcontainerinteraction$refillstate.durability > 0.0) {
+                                                                            itemstack2 = itemstack2.withDurability(
+                                                                                    refillcontainerinteraction$refillstate.durability
+                                                                            );
+                                                                        }
+
+                                                                        if (itemstack1.getQuantity() == 1) {
+                                                                            ItemStackSlotTransaction itemstackslottransaction2 = context.getHeldItemContainer()
+                                                                                    .setItemStackForSlot(context.getHeldItemSlot(), itemstack2);
+                                                                            if (!itemstackslottransaction2.succeeded()) {
+                                                                                interactionsyncdata.state = InteractionState.Failed;
+                                                                                return false;
+                                                                            }
+
+                                                                            context.setHeldItem(itemstack2);
+                                                                        } else {
+                                                                            SimpleItemContainer.addOrDropItemStack(
+                                                                                    commandbuffer, ref, InventoryComponent.getCombined(commandbuffer, ref, InventoryComponent.HOTBAR_FIRST), itemstack2
+                                                                            );
+                                                                            context.setHeldItem(
+                                                                                    context.getHeldItemContainer().getItemStack(context.getHeldItemSlot())
+                                                                            );
+                                                                        }
                                                                     }
+
+                                                                    if (refillcontainerinteraction$refillstate != null
+                                                                        && refillcontainerinteraction$refillstate.getTransformFluid() != null) {
+                                                                        int j = Fluid.getFluidIdOrUnknown(
+                                                                                refillcontainerinteraction$refillstate.getTransformFluid(),
+                                                                                "Unknown fluid %s",
+                                                                                refillcontainerinteraction$refillstate.getTransformFluid()
+                                                                        );
+                                                                        boolean flag = fluidsection.setFluid(
+                                                                                x, y, z, j, (byte) Fluid.getAssetMap().getAsset(j).getMaxFluidLevel()
+                                                                        );
+                                                                        if (!flag) {
+                                                                            interactionsyncdata.state = InteractionState.Failed;
+                                                                        }
+
+                                                                        world.performBlockUpdate(x, y, z);
+                                                                        atomicboolean.set(true);
+                                                                    }
+
+                                                                    return false;
                                                                 }
                                                             }
                                                         }
                                                     }
                                                 }
                                             }
-                                    );
-                                    if (!atomicboolean.get()) {
-                                        context.getState().state = InteractionState.Failed;
-                                    }
+                                        }
+                                );
+                                if (!atomicboolean.get()) {
+                                    context.getState().state = InteractionState.Failed;
                                 }
                             }
                         }

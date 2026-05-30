@@ -3,15 +3,15 @@ package net.conczin.equipment.interactions;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.component.Ref;
-import com.hypixel.hytale.math.vector.Vector3d;
-import com.hypixel.hytale.math.vector.Vector3f;
+import com.hypixel.hytale.math.vector.Rotation3f;
+import com.hypixel.hytale.math.vector.Vector3dUtil;
 import com.hypixel.hytale.protocol.InteractionState;
 import com.hypixel.hytale.protocol.InteractionType;
 import com.hypixel.hytale.protocol.SoundCategory;
 import com.hypixel.hytale.server.core.asset.type.item.config.Item;
 import com.hypixel.hytale.server.core.asset.type.soundevent.config.SoundEvent;
 import com.hypixel.hytale.server.core.entity.InteractionContext;
-import com.hypixel.hytale.server.core.inventory.Inventory;
+import com.hypixel.hytale.server.core.inventory.InventoryComponent;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent;
 import com.hypixel.hytale.server.core.modules.entity.teleport.Teleport;
@@ -21,6 +21,7 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.SoundUtil;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import net.conczin.equipment.utils.Utils;
+import org.joml.Vector3d;
 
 import javax.annotation.Nonnull;
 
@@ -44,7 +45,7 @@ public class TeleportInteraction extends SimpleInstantInteraction {
         }
 
         // Get the remembered position from item metadata
-        Vector3d rememberedPosition = Utils.getData(ref, "YmmersiveEquipmentPosition", Vector3d.CODEC);
+        Vector3d rememberedPosition = Utils.getData(ref, "YmmersiveEquipmentPosition", Vector3dUtil.CODEC);
         if (rememberedPosition == null) {
             context.getState().state = InteractionState.Failed;
             return;
@@ -58,7 +59,7 @@ public class TeleportInteraction extends SimpleInstantInteraction {
         }
 
         // Create and add a teleport component to perform the teleportation
-        Vector3f currentRotation = transform.getRotation().clone();
+        Rotation3f currentRotation = transform.getRotation();
         Teleport teleport = Teleport.createForPlayer(rememberedPosition, currentRotation);
         commandBuffer.addComponent(ref, Teleport.getComponentType(), teleport);
 
@@ -70,18 +71,17 @@ public class TeleportInteraction extends SimpleInstantInteraction {
         }
 
         // Change item state back to default (remove state)
-        Inventory inventory = Utils.getInventory(ref);
-        ItemStack itemInHand = inventory.getActiveHotbarItem();
+        ItemStack itemInHand = InventoryComponent.getItemInHand(commandBuffer, ref);
         if (itemInHand != null) {
             ItemStack newItemInHand = withDefaultState(itemInHand);
-            inventory.getHotbar().replaceItemStackInSlot(inventory.getActiveHotbarSlot(), itemInHand, newItemInHand);
+            context.getHeldItemContainer().replaceItemStackInSlot(context.getHeldItemSlot(), itemInHand, newItemInHand);
+            context.setHeldItem(newItemInHand);
         }
     }
 
     public ItemStack withDefaultState(ItemStack itemStack) {
         Item item = itemStack.getItem();
         String defaultState = item.getId().substring(1, item.getId().lastIndexOf("_State_"));
-        //noinspection deprecation
         return new ItemStack(defaultState, itemStack.getQuantity(), itemStack.getDurability(), itemStack.getMaxDurability(), itemStack.getMetadata());
     }
 }
