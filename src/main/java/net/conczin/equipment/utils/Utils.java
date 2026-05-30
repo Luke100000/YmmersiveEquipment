@@ -5,6 +5,7 @@ import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.server.core.inventory.InventoryComponent;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
+import com.hypixel.hytale.server.core.inventory.transaction.ItemStackSlotTransaction;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 
 public class Utils {
@@ -14,7 +15,11 @@ public class Utils {
             ItemStack newItemInHand = itemInHand.withMetadata(field, codec, data);
             InventoryComponent.Hotbar hotbar = commandBuffer.getComponent(ref, InventoryComponent.Hotbar.getComponentType());
             if (hotbar != null) {
-                hotbar.getInventory().replaceItemStackInSlot(hotbar.getActiveSlot(), itemInHand, newItemInHand);
+                ItemStackSlotTransaction transaction = hotbar.getInventory()
+                        .setItemStackForSlot(hotbar.getActiveSlot(), newItemInHand);
+                if (!transaction.succeeded()) {
+                    hotbar.getInventory().setItemStackForSlot(hotbar.getActiveSlot(), itemInHand);
+                }
             }
         }
     }

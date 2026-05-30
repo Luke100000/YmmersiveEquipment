@@ -10,6 +10,7 @@ import com.hypixel.hytale.protocol.SoundCategory;
 import com.hypixel.hytale.server.core.asset.type.soundevent.config.SoundEvent;
 import com.hypixel.hytale.server.core.entity.InteractionContext;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
+import com.hypixel.hytale.server.core.inventory.transaction.ItemStackSlotTransaction;
 import com.hypixel.hytale.server.core.modules.entity.component.TransformComponent;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.CooldownHandler;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.SimpleInstantInteraction;
@@ -63,7 +64,11 @@ public class RememberPositionInteraction extends SimpleInstantInteraction {
         ItemStack itemInHand = context.getHeldItem();
         if (itemInHand != null) {
             ItemStack newItemInHand = itemInHand.withState("Charged");
-            context.getHeldItemContainer().replaceItemStackInSlot(context.getHeldItemSlot(), itemInHand, newItemInHand);
+            ItemStackSlotTransaction transaction = context.getHeldItemContainer()
+                    .setItemStackForSlot(context.getHeldItemSlot(), newItemInHand);
+            if (!transaction.succeeded()) {
+                context.getState().state = InteractionState.Failed;
+            }
             context.setHeldItem(newItemInHand);
         }
     }
