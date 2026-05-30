@@ -38,7 +38,6 @@ def hytaleSourcesJar = "$hytaleBasePath/install/$patchline/package/game/latest/S
 
 dependencies {
     implementation(files(hytaleJar))
-    implementation("com.buuz135:MultipleHUD:${multipleHudVersion}")
 }
 
 def getAppVersion = {

@@ -1,6 +1,9 @@
 package net.conczin.equipment.systems;
 
-import com.hypixel.hytale.component.*;
+import com.hypixel.hytale.component.ArchetypeChunk;
+import com.hypixel.hytale.component.CommandBuffer;
+import com.hypixel.hytale.component.Ref;
+import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.tick.EntityTickingSystem;
 import com.hypixel.hytale.math.vector.Transform;
@@ -8,21 +11,19 @@ import com.hypixel.hytale.protocol.*;
 import com.hypixel.hytale.protocol.packets.camera.SetServerCamera;
 import com.hypixel.hytale.server.core.asset.type.blocktype.config.BlockType;
 import com.hypixel.hytale.server.core.entity.entities.Player;
-import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.inventory.InventoryComponent;
+import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.core.util.TargetUtil;
 import net.conczin.equipment.data.CameraStates;
-import net.conczin.equipment.ui.EmptyHud;
-import net.conczin.equipment.ui.HudManager;
 import net.conczin.equipment.ui.OverlayHud;
+import org.joml.Vector3d;
+import org.joml.Vector3i;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import org.joml.Vector3d;
-import org.joml.Vector3i;
 
 
 public class CameraSystem extends EntityTickingSystem<EntityStore> {
@@ -84,11 +85,11 @@ public class CameraSystem extends EntityTickingSystem<EntityStore> {
                 playerRef.getPacketHandler().writeNoCache(new SetServerCamera(ClientCameraView.Custom, true, s));
 
                 if (state.overlay != null) {
-                    HudManager.setHud(player, playerRef, "YmmersiveEquipmentCamera", new OverlayHud(playerRef, state.overlay));
+                    player.getHudManager().addCustomHud(playerRef, new OverlayHud(playerRef, state.overlay));
                 }
             } else if (state.applied) {
                 playerRef.getPacketHandler().writeNoCache(new SetServerCamera(ClientCameraView.Custom, false, null));
-                HudManager.setHud(player, playerRef, "YmmersiveEquipmentCamera", new EmptyHud(playerRef));
+                player.getHudManager().removeCustomHud(playerRef, "YmmersiveEquipment/" + state.overlay);
                 state.applied = false;
             }
         }
